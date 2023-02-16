@@ -1,8 +1,7 @@
 #include <stdio.h>
 
 /**
- * use function puts
- * You are not allowed to use printf
+ * main - Entry point
  *
  * Return: Always 0 (success)
  */
