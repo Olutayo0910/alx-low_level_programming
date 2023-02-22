@@ -1,26 +1,22 @@
 #include "main.h"
-
 /**
- * main - check the code.
- *
- * Return: Always 0.
+ * print_alphabet_x10 - in lowercase, followed by a new line
  */
 void print_alphabet_x10(void)
 {
-	char la;
+	char ch;
 	int i;
 
 
-	
+
 	for (i = 0; i < 10; i++)
-	
 	{
-		la = 'a'
-		while (la <= 'z')
+		ch = 'a';
+		while (ch <= 'z')
 		{
-			_putchar(la);
-			la++;
+			_putchar(ch);
+			ch++;
 		}
-		_putchar("\n");
+		_putchar('\n');
 	}
 }
