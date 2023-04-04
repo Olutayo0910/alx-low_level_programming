@@ -1,7 +1,7 @@
 #include "lists.h"
 #include <stdlib.h>
 /**
-  * listint_t insert_nodeint_at_index - insert a node at index
+  * insert_nodeint_at_index - insert a node at index
   * @head: head of the list
   * @index: location of  node
   * @n: value of the  node
