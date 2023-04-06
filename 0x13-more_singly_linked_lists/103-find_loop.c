@@ -1,31 +1,30 @@
+#include "lists.h"
 /**
- * free_listint_safe - frees a listint_t list.
- * @h: double pointer to head of list
- *
- * Return: the size of the list that was free’d
- */
-size_t free_listint_safe(listint_t **h)
+* find_listint_loop - finds the loop
+* @head: head
+* Return: address
+*/
+listint_t *find_listint_loop(listint_t *head)
 {
-    size_t size = 0;
-    listint_t *current, *next;
+listint_t *a = head;
+listint_t *b = head;
 
-    if (!h || !*h)
-        return (0);
-
-    current = *h;
-    while (current)
-    {
-        size++;
-        next = current->next;
-        free(current);
-        if (next >= current)
-        {
-            *h = NULL;
-            return (size);
-        }
-        current = next;
-    }
-
-    *h = NULL;
-    return (size);
+if (!head)
+return (NULL);
+while (a && b && b->next)
+{
+b = b->next->next;
+a = a->next;
+if (b == a)
+{
+a = head;
+while (a != b)
+{
+a = a->next;
+b = b->next;
+}
+return (b);
+}
+}
+return (NULL);
 }
