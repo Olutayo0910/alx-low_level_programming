@@ -31,12 +31,9 @@ char **strtow(char *str)
 
 	if (str == NULL || *str == '\0')
 		return (NULL);
-
 	for (count = height = 0; str[count] != '\0'; count++)
-	{
 		if (str[count] != ' ' && (str[count + 1] == ' ' || str[count + 1] == '\0'))
 			height++;
-	}
 
 	words = malloc((height + 1) * sizeof(char *));
 	if (words == NULL || height == 0)
