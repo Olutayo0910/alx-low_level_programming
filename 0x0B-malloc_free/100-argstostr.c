@@ -1,51 +1,52 @@
+#include "main.h"
 #include <stdlib.h>
 
 /**
- * argstostr - Concatenates all the arguments of the program.
- * @ac: The number of arguments.
- * @av: The array of arguments.
- * Return: Pointer to the concatenated string, or NULL on failure.
+ * argstostr - Concatenates all the arguments of a program.
+ * @ac: Argument count.
+ * @av: Argument vector.
+ *
+ * Return: Pointer to a new string, or NULL if it fails.
  */
 char *argstostr(int ac, char **av)
 {
-	int i, k, len;
-	char *str;
-	int total_len = 0;
+	char *result;
+	int total_length = 0;
+	int i, j, index = 0;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
 	for (i = 0; i < ac; i++)
 	{
-		len = 0;
-		while (av[i][len])
-			len++;
-		total_len += len;
-	}
-	total_len += ac - 1;
-	str = malloc(sizeof(char) * (total_len + 1));
-	if (str == NULL)
-		return (NULL);
+		if (av[i] == NULL)
+			return (NULL);
 
-	k = 0;
+		for (j = 0; av[i][j] != '\0'; j++)
+			total_length++;
+		total_length++;
+	}
+
+	result = malloc((total_length + 1) * sizeof(char));
+
+	if (result == NULL)
+	{
+		free(result);
+		return (NULL);
+	}
+
 	for (i = 0; i < ac; i++)
 	{
-		len = 0;
-		while (av[i][len])
+		for (j = 0; av[i][j] != '\0'; j++)
 		{
-			str[k] = av[i][len];
-			k++;
-			len++;
+			result[index] = av[i][j];
+			index++;
 		}
-
-		if (i != ac - 1)
-		{
-			str[k] = '\n';
-			k++;
-		}
+		result[index] = '\n';
+		index++;
 	}
 
-	str[k] = '\0';
+	result[index] = '\0';
 
-	return (str);
+	return (result);
 }
