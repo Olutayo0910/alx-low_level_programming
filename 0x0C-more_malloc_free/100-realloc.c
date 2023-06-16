@@ -9,7 +9,7 @@
  *
  * Return: Pointer to the reallocated memory block.
  *         - If new_size == old_size, return ptr.
- *         - If new_size is equal to zero and ptr is not NULL, free(ptr) and return NULL.
+ *         - If new_size is equal to zero and ptr is not NULL.
  *         - If malloc fails, return NULL.
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
