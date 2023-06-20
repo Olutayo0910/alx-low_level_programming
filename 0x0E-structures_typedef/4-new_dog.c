@@ -1,51 +1,53 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "dog.h"
+#include <stdlib.h>
 
 /**
- * new_dog - Creates a new dog
- * @name: The name of the dog
- * @age: The age of the dog
- * @owner: The owner of the dog
+ * new_dog - Creates a new dog.
+ * @name: Name of the dog.
+ * @age: Age of the dog.
+ * @owner: Owner of the dog.
  *
- * Return: Pointer to the newly created dog (dog_t)
- *         NULL if memory allocation fails
+ * Return: Pointer to the newly created dog (dog_t).
+ *         NULL if memory allocation fails or name/owner is NULL.
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	tabdog_t *new_dog;
-	tabchar *new_name, *new_owner;
-	tabint name_len, owner_len;
+	dog_t *new_dog;
+	int name_len = 0, owner_len = 0, i;
 
-	/* Calculate the lengths of name and owner strings */
-	name_len = strlen(name) + 1;
-	owner_len = strlen(owner) + 1;
+	if (name == NULL || owner == NULL)
+		return (NULL);
 
-	/* Allocate memory for the new dog structure */
-	new_dog = malloc(sizeof(tabdog_t));
+	while (name[name_len])
+		name_len++;
+
+	while (owner[owner_len])
+		owner_len++;
+
+	new_dog = malloc(sizeof(*new_dog));
 	if (new_dog == NULL)
 		return (NULL);
 
-	/* Allocate memory for the name and owner strings */
-	new_name = malloc(name_len * sizeof(tabchar));
-	new_owner = malloc(owner_len * sizeof(tabchar));
-	if (new_name == NULL || new_owner == NULL)
+	new_dog->name = malloc((name_len + 1) * sizeof(char));
+	new_dog->owner = malloc((owner_len + 1) * sizeof(char));
+
+	if (new_dog->name == NULL || new_dog->owner == NULL)
 	{
+		free(new_dog->name);
+		free(new_dog->owner);
 		free(new_dog);
-		free(new_name);
-		free(new_owner);
 		return (NULL);
 	}
 
-	/* Copy the name and owner strings */
-	strncpy(new_name, name, name_len);
-	strncpy(new_owner, owner, owner_len);
+	for (i = 0; i < name_len; i++)
+		new_dog->name[i] = name[i];
+	new_dog->name[i] = '\0';
 
-	/* Assign the copied strings to the new dog structure */
-	new_dog->name = new_name;
 	new_dog->age = age;
-	new_dog->owner = new_owner;
+
+	for (i = 0; i < owner_len; i++)
+		new_dog->owner[i] = owner[i];
+	new_dog->owner[i] = '\0';
 
 	return (new_dog);
 }
