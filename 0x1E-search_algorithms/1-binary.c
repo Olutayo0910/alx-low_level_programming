@@ -11,12 +11,13 @@
  */
 int binary_search_recursive(int *array, size_t l, size_t r, int value)
 {
+	size_t i;
 	if (l <= r)
 	{
 		size_t mid = l + (r - l) / 2;
 
 		printf("Searching in array: ");
-		for (size_t i = l; i <= r; i++)
+		for (i = l; i <= r; i++)
 		{
 			if (i < r)
 				printf("%d, ", array[i]);
